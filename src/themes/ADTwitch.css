@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&family=Rowdies:wght@300;400&display=swap');
+
+:root {
+	--brand-font: 'Rowdies';
+	--body-font: 'Rubik';
+	--border-width: 4px;
+	--animation-duration: 500ms;
+	--Color1: rgb(111 115 127 / 80%);
+	--Color2: rgb(103 67 79 / 60%);
+	--Color3: rgb(122 69 78 / 80%);
+	--Color4: rgb(162 82 83 / 80%);
+	--Color5: rgb(135 110 89 / 80%);
+	--Color6: rgb(164 157 120 / 80%);
+	--Color7: rgb(178 154 171 / 80%);
+	--Color8: rgb(170 117 158 / 80%);
+	--Color9: rgb(133 92 129 / 80%);
+	--Color10: #6b5665;
+	--Color11: #614f52;
+	--Color12: #512835;
+	--rainbow-angle: 105deg;
+	--rainbow: var(--Color1) 8.3333%, var(--Color2) 8.3333% 16.6666%,
+		var(--Color3) 16.6666% 25%, var(--Color4) 25% 33.3333%,
+		var(--Color5) 33.3333% 41.6666%, var(--Color6) 41.6666% 50%,
+		var(--Color7) 50% 58.3333%, var(--Color8) 58.3333% 66.6666%,
+		var(--Color9) 66.6666% 75%, var(--Color10) 75% 83.3333%,
+		var(--Color11) 83.3333% 91.6666%, var(--Color12) 91.6666% 100%;
+	--black: #0e091a;
+	--black-transparent: rgb(14 9 26 / 50%);
+	--white-transparent: rgb(255 255 255 / 30%);
+}
+
+html,
+body {
+	overflow: hidden;
+	height: 100vh;
+	margin-top: 0;
+	font-family: var(--body-font), sans-serif;
+}
+
+[data-twitch-chat] {
+	list-style: none;
+	margin: 0;
+	padding: 0.1em;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+[data-twitch-message] {
+	margin-top: 0.25rem;
+	margin-bottom: 0.25rem;
+	word-wrap: break-word;
+	box-shadow: 0 0 #0000, 0 0 #0000, 0 20px 25px -5px rgb(0 0 0 / 40%),
+		0 10px 10px -5px rgb(0 0 0 / 10%);
+	transition: opacity var(--animation-duration) ease-in,
+		transform var(--animation-duration) ease-in;
+	opacity: 0;
+	transform: rotateX(-90deg);
+	animation: show var(--animation-duration) 100ms
+		cubic-bezier(0.38, 0.97, 0.56, 0.76) forwards;
+	background-image: linear-gradient(var(--rainbow-angle), var(--rainbow));
+	border-radius: 8px;
+}
+
+[data-twitch-message][data-twitch-message-display-status='deleting'] {
+	animation: hide var(--animation-duration) 0ms
+		cubic-bezier(0.38, 0.97, 0.56, 0.76) forwards;
+}
+
+.twitch-chat-sender {
+	/* Spacing */
+	margin-top: var(--border-width);
+	margin-left: 22px;
+	margin-right: 22px;
+	margin-bottom: 0.25rem;
+	padding-left: 0.5rem;
+	padding-bottom: 0;
+	letter-spacing: 2px /* Font */;
+	font-family: 'Noto Sans', sans-serif;
+	font-style: 'black 900' /* text-transform: uppercase; */;
+	font-weight: 700;
+	box-shadow: 0 0 #0000, 0 0 #0000, 0 20px 25px -5px rgb(0 0 0 / 60%),
+		0 10px 10px -5px rgb(0 0 0 / 10%);
+	border-radius: 8px;
+
+	/* Colors */
+	background-color: rgb(7 5 14 / 58.9%);
+	color: rgb(255 255 255 / 80%);
+}
+
+.twitch-chat-message {
+	/* Spacing */
+	padding: 0.75rem;
+	padding-top: calc(0.2rem / 2);
+	margin-bottom: var(--border-width);
+	padding-bottom: 0.2rem;
+	border-radius: 8px;
+	margin-left: 16px;
+	margin-right: 16px;
+
+	/* Colors */
+	background-color: var(--black-transparent);
+	color: rgb(255 255 255 / 80%);
+}
+
+@keyframes show {
+	100% {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes hide {
+	0% {
+		opacity: 1;
+		transform: none;
+	}
+
+	100% {
+		opacity: 0;
+		transform: rotateX(-90deg);
+	}
+}
+
+[data-twitch-message-reply] {
+	display: none;
+}
+
+[data-twitch-mentioned-user] {
+	background: transparent;
+	font-weight: 300;
+	font-family: var(--brand-font), sans-serif;
+	color: royalblue;
+	filter: brightness(140%);
+}
+
+.twitch-chat-command {
+	background: transparent;
+	font-weight: 300;
+	font-family: var(--brand-font), sans-serif;
+	color: inherit;
+}
+
+[data-twitch-emote] {
+	width: 1.3em;
+	margin-bottom: -0.2em;
+}
+
+[data-twitch-emote='<3'] {
+	width: 2em;
+	margin: -0.6em -0.4em;
+}
+
+[data-twitch-message][data-twitch-message-status~='highlighted'] > * {
+	background-color: var(--white-transparent);
+	color: rgb(14 9 26 / 80%);
+	font-weight: 900;
+}
+
+[data-twitch-message-status~='action'] .twitch-chat-message {
+	font-style: italic;
+}
